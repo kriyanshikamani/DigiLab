@@ -1,21 +1,16 @@
+import React from "react";
+import "./main.css";
+import DigiLab from "./DigiLab";
 
-import Header from './components/Header/Header.jsx';
-import Mainbody from './components/Mainbody/Mainbody.jsx';
-import Footer from './components/Footer/Footer.jsx';
-import Test from './components/Test_Packages/Test.jsx';
-import './main.css';
+import { BrowserRouter } from "react-router-dom";
+import { SharedContextProvider } from "./context/SharedContext.jsx";
 
-function App() {
+export default function App() {
   return (
-    <>
-  
-      {/* <Header/>
-      <Mainbody/>
-      <Footer/> */}
-      <Test/>
-    </>
+    <SharedContextProvider>
+      <BrowserRouter>
+        <DigiLab />
+      </BrowserRouter>
+    </SharedContextProvider>
   );
 }
-
-
-export default App
