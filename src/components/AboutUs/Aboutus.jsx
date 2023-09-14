@@ -17,6 +17,7 @@ const {data}=useContext(SharedContext);
 
   return (
     <div className="relative">
+       <div className="container bg-white p-6 mx-auto mt-4">
       <img src={about_image} alt="About Us" className="w-full" />
 
       <div className="w-10/12 mx-auto">
@@ -52,6 +53,7 @@ const {data}=useContext(SharedContext);
             ))}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

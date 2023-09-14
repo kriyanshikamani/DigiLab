@@ -8,7 +8,7 @@ const Mainbody = () => {
     <div>
     <div className=" bg-gradient-to-l from-pink-100 to-white-100  via-sky-100">
       <div className="grid grid-cols-2 divide-x justify-end my-3 ">
-        <h1 className="font-bold text-blue-900 text-4xl from-neutral-700 mx-10 my-10">
+        <h1 className="animate-pulse font-bold text-blue-900 text-4xl from-neutral-700 mx-10 my-10">
           Lab Results
           <br />
           At Your Fingertips

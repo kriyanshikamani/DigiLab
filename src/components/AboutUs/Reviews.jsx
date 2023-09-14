@@ -5,7 +5,7 @@ import SharedContext from "../../context/SharedContext";
 const Reviews = () => {
   const {customers}=useContext(SharedContext);
   return (
-    <div>
+    <div  className="container bg-white p-6 mx-auto mt-4">
       
       <main className="container mx-auto w-1/2 py-8">
         <h1 className="text-3xl font-bold mb-4">Customer Reviews</h1>

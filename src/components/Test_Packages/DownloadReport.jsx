@@ -43,8 +43,9 @@ const DownloadReport = () => {
   };
 
   return (
+    <div className="container bg-white p-6 mx-auto mt-4">
     <div className="w-10/12 mx-auto flex justify-center items-center h-screen">
-      <div className="max-w-md mx-auto mt-6 p-6 bg-white rounded shadow-md w-full">
+      <div className="max-w-md mx-auto mt-6 p-6 bg-blue-400 rounded shadow-md w-full">
         <h2 className="text-xl font-semibold mb-4">View All Your Test Reports</h2>
         {showWarning && (
           <p className="text-red-600 mb-2">Incorrect ID or password. Please try again.</p>
@@ -52,7 +53,7 @@ const DownloadReport = () => {
         <img src={download_report} alt="download_report" className="h-32 mt-4" />
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="id" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="id" className="block text-sm font-medium text-white">
               Enter ID
             </label>
             <input
@@ -60,12 +61,13 @@ const DownloadReport = () => {
               id="id"
               className="mt-1 p-2 border rounded w-full"
               value={id}
+              placeholder='ID'
               onChange={(e) => setId(e.target.value)}
               required
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="block text-sm font-medium text-white">
               Password
             </label>
             <input
@@ -73,13 +75,14 @@ const DownloadReport = () => {
               id="password"
               className="mt-1 p-2 border rounded w-full"
               value={password}
+              placeholder='password'
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
+            className="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
           >
             Submit
           </button>
@@ -96,6 +99,7 @@ const DownloadReport = () => {
       <div className="mx-4 mt-4 w-8/12 h-3/6">
         <img src={laboratory_report} alt="laboratory_report" />
       </div>
+    </div>
     </div>
   );
 };
