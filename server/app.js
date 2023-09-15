@@ -2,11 +2,14 @@ const dotenv = require('dotenv');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const mongoose = require('mongoose');
+
 const Registration = require('./models/registration');
 
 const app=express();
+app.use(express.json());
 
-app.use(cors());
+
 app.use(bodyParser.json());
 dotenv.config({path:'./config.env'});
 
