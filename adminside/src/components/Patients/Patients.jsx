@@ -35,7 +35,7 @@ const Patients = () => {
   const [searchMobilenumber, setSearchmobilenumber] = useState("");
 
   const [filteredPatients, setFilteredPatients] = useState([]);
-  const [filteredData, setFilteredData] = useState(patients);
+  // const [filteredData, setFilteredData] = useState(patients);
 
   const handleInputChange = (e) => {
     setSearchReferredBy(e.target.value);
@@ -63,11 +63,12 @@ const Patients = () => {
     setSearchmobilenumber("");
     setFilteredPatients([]);
   };
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     async function fetchPatientData() {
       try {
-        const response = await axios.get("http://localhost:3000/patient/getall"); // Update the URL to match your backend
+        const response = await axios.get("http://localhost:3000/patient/getall");
         setFilteredData(response.data);
       } catch (error) {
         console.error('Error fetching patient data:', error);
