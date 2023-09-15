@@ -109,7 +109,7 @@ const Patients = () => {
                     <Link to="/view-patient-details" className="flex items-center px-2 py-1 text-blue-500 hover:text-blue-900">
                       <BsFillEyeFill className="mr-1" /> View
                     </Link>
-                    <Link to="/update-patient-details" className="flex items-center px-2 py-1 text-blue-500 hover:text-blue-900">
+                    <Link to={`//update-patient-details/${patient._id}`}  className="flex items-center px-2 py-1 text-blue-500 hover:text-blue-900">
                       <HiPencil className="mr-1" /> Edit
                     </Link>
                     <Link to="/add-patient" className="flex items-center px-2 py-1 text-blue-500 hover:text-blue-900">
@@ -118,7 +118,7 @@ const Patients = () => {
                   </div>
                 </td>
               </tr>
-            ))}
+            ))}  
           </tbody>
         </table>
       </div>

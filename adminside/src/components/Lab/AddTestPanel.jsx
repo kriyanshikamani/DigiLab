@@ -72,6 +72,7 @@ const AddTestPanel = () => {
       console.log("Response:", response);
       if (response.status === 201) {
         toast.success("Tests Added Successfully");
+         navigate("/test-panels");
       } else {
         toast.error("Error saving user data");
       }

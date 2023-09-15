@@ -59,8 +59,8 @@ const EditTestPanel = () => {
     try {
       const response = await axios.put(`http://localhost:3000/testpanel/${testpanelId}`, data);
       if (response.status === 200) {
-        toast.success("Test Package Updated Successfully");
-        navigate("/test-packages");
+        toast.success("Test panel Updated Successfully");
+        navigate("/test-panels");
       } else {
         toast.error("Tests Update Failed");
       }
