@@ -75,17 +75,7 @@ app.use('/testpackage', testpackageRoutes);
 app.use('/registration', registrationRoutes);
 app.use('/testpanel', testpanelRoutes);
 
-// const jwt = require('jsonwebtoken');
-// const createToken=async()=>{
-//   const  token =await  jwt.sign({_id:"64f6c866bf20ad2b8845b73b"},"mynameiskriyanshisureshbhaikamani",
-//     {expiresIn:"2 days"});
-  
-//     console.log(token);
 
-//     const userVer=await jwt.verify(token,"mynameiskriyanshisureshbhaikamani"); 
-//     console.log(userVer);
-// }
-// createToken();
 
 app.listen(PORT,()=>{
     console.log('Server is running on port ',PORT);

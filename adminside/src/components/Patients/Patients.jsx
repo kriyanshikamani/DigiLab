@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { BsFillEyeFill } from "react-icons/bs";
 import { HiPencil } from "react-icons/hi";
@@ -12,6 +11,7 @@ const Patients = () => {
   const [searchName, setSearchName] = useState("");
   const [searchEmail, setSearchEmail] = useState("");
   const [searchMobileNumber, setSearchMobileNumber] = useState("");
+  const [selectedPatient, setSelectedPatient] = useState(null);
 
   useEffect(() => {
     async function fetchPatientData() {
@@ -26,20 +26,25 @@ const Patients = () => {
     fetchPatientData();
   }, []);
 
+ 
+
   const filterPatients = () => {
     const filteredData = patientData.filter((patient) => {
       const nameMatch = patient.firstname.toLowerCase().includes(searchName.toLowerCase()) ||
         patient.lastname.toLowerCase().includes(searchName.toLowerCase());
       const emailMatch = patient.email.toLowerCase().includes(searchEmail.toLowerCase());
-      const mobileMatch = String(patient.phone).includes(searchMobileNumber); // Convert to string
-  
-      // Combine the conditions based on the search fields
+      const mobileMatch = String(patient.phone).includes(searchMobileNumber);
+
       return (!searchName || nameMatch) && (!searchEmail || emailMatch) && (!searchMobileNumber || mobileMatch);
     });
     return filteredData;
   };
-  
 
+  const handleViewDetailsClick = (patient) => {
+    setSelectedPatient(patient);
+  };
+
+  
   return (
     <div className="container mx-auto p-6 bg-white rounded-lg shadow-lg">
       <form className="space-y-6">
@@ -106,10 +111,16 @@ const Patients = () => {
                 <td className="border p-2">{patient.email}</td>
                 <td className="border p-2">
                   <div className="flex items-center space-x-2">
-                    <Link to="/view-patient-details" className="flex items-center px-2 py-1 text-blue-500 hover:text-blue-900">
-                      <BsFillEyeFill className="mr-1" /> View
-                    </Link>
-                    <Link to={`//update-patient-details/${patient._id}`}  className="flex items-center px-2 py-1 text-blue-500 hover:text-blue-900">
+                  <Link
+  to={`/view-patient-details/${patient._id}`} // Assuming _id is the patient's unique identifier
+  className="flex items-center px-2 py-1 text-blue-500 hover:text-blue-900"
+>
+  <BsFillEyeFill className="mr-1" /> View
+</Link>
+
+  
+
+                    <Link to={`/update-patient-details/${patient._id}`} className="flex items-center px-2 py-1 text-blue-500 hover:text-blue-900">
                       <HiPencil className="mr-1" /> Edit
                     </Link>
                     <Link to="/add-patient" className="flex items-center px-2 py-1 text-blue-500 hover:text-blue-900">
@@ -118,7 +129,7 @@ const Patients = () => {
                   </div>
                 </td>
               </tr>
-            ))}  
+            ))}
           </tbody>
         </table>
       </div>

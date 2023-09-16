@@ -52,7 +52,7 @@ const MyRoutes = () => {
         
        <Route path="/patients" element={<Patients/>}/>
       <Route path="/update-patient-details/:patientId" element={<UpdatePatientsDetails/>}/>
-      <Route path="/view-patient-details" element={<ViewPatientDetails/>}/>
+      <Route path="/view-patient-details/:patientId" element={<ViewPatientDetails/>}/>
 
      
       <Route path="/payments" element={<Payments/>}/>

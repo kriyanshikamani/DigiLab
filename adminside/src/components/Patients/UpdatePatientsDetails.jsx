@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const UpdatePatientsDetails = () => {
   const { patientId } = useParams();
-  const [patientid, setpatientId] = useState(null); // Initialize with patientId
-  const [editedfirstName, setEditedFirstName] = useState('');
-  const [editedlastName, setEditedLastName] = useState('');
-  const [editedMobileNumber, setEditedMobileNumber] = useState('');
-  const [editedEmail, setEditedEmail] = useState('');
-  const [editedAddress, setEditedAddress] = useState('');
   const navigate = useNavigate();
-  const [selectedGender, setSelectedGender] = useState(""); // State for selected gender
+  const [editedFirstName, setEditedFirstName] = useState("");
+  const [editedLastName, setEditedLastName] = useState("");
+  const [editedMobileNumber, setEditedMobileNumber] = useState("");
+  const [editedEmail, setEditedEmail] = useState("");
+  const [editedAddress, setEditedAddress] = useState("");
+  const [editedGender, setEditedGender] = useState("");
 
   useEffect(() => {
-    console.log("patient ID:", patientId);
     if (patientId) {
-      // Fetch the patient data for editing
       fetchPatientData();
     }
   }, [patientId]);
@@ -26,135 +22,122 @@ const UpdatePatientsDetails = () => {
     try {
       const response = await axios.get(`http://localhost:3000/patient/${patientId}`);
       const updatedPatient = response?.data;
-      setEditedFirstName(updatedPatient.firstName); // Set the edited category name
-      setEditedLastName(updatedPatient.lastName);
-      setEditedMobileNumber(updatedPatient.mobileNumber);
+      setEditedFirstName(updatedPatient.firstname);
+      setEditedLastName(updatedPatient.lastname);
+      setEditedMobileNumber(updatedPatient.phone);
       setEditedEmail(updatedPatient.email);
       setEditedAddress(updatedPatient.address);
-      setpatientId(updatedPatient);
+      setEditedGender(updatedPatient.gender);
     } catch (error) {
       console.error("Error fetching patient data:", error);
     }
   };
 
-  const handleUpdateClick = async (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
-
+  const handleUpdateClick = async () => {
     try {
       await axios.put(`http://localhost:3000/patient/${patientId}`, {
-        firstName: editedfirstName,
-        lastName: editedlastName,
+        firstName: editedFirstName,
+        lastName: editedLastName,
         mobileNumber: editedMobileNumber,
         email: editedEmail,
         address: editedAddress,
+        gender: editedGender,
       });
       alert("Patient updated successfully.");
-      navigate("/view-patient-details");
-      // Handle success (e.g., show a success message or navigate back)
+      navigate("/patients");
+      console.log(firstName);
+      console.log(lastName);
+      console.log(mobileNumber);
+      console.log(email);
+      console.log(address);
+      
     } catch (error) {
       console.error("Error updating patient:", error);
-      // Handle error (e.g., show an error message)
     }
   };
 
   return (
-    <div className="container bg-white p-6">
-      <div className="container mx-auto mt-4">
+    <div className="bg-white p-6">
+      <div className="mx-auto mt-4 max-w-md">
         <h1 className="text-3xl font-bold mb-4 text-center">Update Patient Details</h1>
-        <div className="mb-4">
-          <form onSubmit={handleUpdateClick}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="col-span-1">
+        <div className="mb-4 space-y-4">
+          <input
+            type="text"
+            name="firstname"
+            placeholder="First Name"
+            value={editedFirstName}
+            onChange={(e) => setEditedFirstName(e.target.value)}
+            className="border rounded-lg px-3 py-2 w-full"
+          />
+          <input
+            type="text"
+            name="lastname"
+            placeholder="Last Name"
+            value={editedLastName}
+            onChange={(e) => setEditedLastName(e.target.value)}
+            className="border rounded-lg px-3 py-2 w-full"
+          />
+          <input
+            type="text"
+            name="phone"
+            placeholder="Mobile Number"
+            value={editedMobileNumber}
+            onChange={(e) => setEditedMobileNumber(e.target.value)}
+            className="border rounded-lg px-3 py-2 w-full"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={editedEmail}
+            onChange={(e) => setEditedEmail(e.target.value)}
+            className="border rounded-lg px-3 py-2 w-full"
+          />
+          <textarea
+            name="address"
+            placeholder="Address"
+            value={editedAddress}
+            onChange={(e) => setEditedAddress(e.target.value)}
+            className="border rounded-lg px-3 py-2 w-full resize-none"
+          />
+          <div>
+            <label className="block text-gray-700 text-sm font-bold mb-2">Gender:</label>
+            <div className="flex space-x-4">
+              <div className="flex items-center">
                 <input
-                  type="text"
-                  placeholder="First Name"
-                  name="firstname"
-                  value={editedfirstName}
-                  onChange={(e) => setEditedFirstName(e.target.value)}
-                  className="border rounded-lg px-3 py-2 w-full"
+                  type="radio"
+                  id="male"
+                  value="male"
+                  name="gender"
+                  checked={editedGender === "male"}
+                  onChange={() => setEditedGender("male")}
                 />
+                <label htmlFor="male" className="ml-2 cursor-pointer">
+                  Male
+                </label>
               </div>
-              <div className="col-span-1">
+              <div className="flex items-center">
                 <input
-                  type="text"
-                  placeholder="Last Name"
-                  name="lastname"
-                  value={editedlastName}
-                  onChange={(e) => setEditedLastName(e.target.value)}
-                  className="border rounded-lg px-3 py-2 w-full"
+                  type="radio"
+                  id="female"
+                  value="female"
+                  name="gender"
+                  checked={editedGender === "female"}
+                  onChange={() => setEditedGender("female")}
                 />
-              </div>
-              <div className="col-span-2">
-                <label className="block text-gray-700 text-sm font-bold mb-2">Gender:</label>
-                <div className="flex space-x-4">
-                  <div className="flex items-center">
-                    <input
-                      type="radio"
-                      id="male"
-                      value="male"
-                      name="gender"
-                      checked={selectedGender === "male"}
-                      onChange={(e) => setSelectedGender(e.target.value)}
-                    />
-                    <label htmlFor="male" className="ml-2 cursor-pointer">
-                      Male
-                    </label>
-                  </div>
-                  <div className="flex items-center">
-                    <input
-                      type="radio"
-                      id="female"
-                      name="gender"
-
-                      value="female"
-                      checked={selectedGender === "female"}
-                      onChange={(e) => setSelectedGender(e.target.value)}
-                    />
-                    <label htmlFor="female" className="ml-2 cursor-pointer">
-                      Female
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div className="col-span-1">
-                <input
-                  type="text"
-                  placeholder="Mobile Number"
-                  name="phone"
-                  value={editedMobileNumber}
-                  onChange={(e) => setEditedMobileNumber(e.target.value)}
-                  className="border rounded-lg px-3 py-2 w-full"
-                />
-              </div>
-              <div className="col-span-1">
-                <input
-                  type="email"
-                  placeholder="Email"
-                  name="email"
-                  value={editedEmail}
-                  onChange={(e) => setEditedEmail(e.target.value)}
-                  className="border rounded-lg px-3 py-2 w-full"
-                />
-              </div>
-              <div className="col-span-2">
-                <label className="block text-gray-700 text-sm font-bold mb-2">Address:</label>
-                <textarea
-                  placeholder="Enter address"
-                  name="address"
-                  value={editedAddress}
-                  onChange={(e) => setEditedAddress(e.target.value)}
-                  className="border rounded-lg px-3 py-2 w-full h-24 resize-none"
-                />
+                <label htmlFor="female" className="ml-2 cursor-pointer">
+                  Female
+                </label>
               </div>
             </div>
-            <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Update
-            </button>
-          </form>
+          </div>
         </div>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded block mx-auto"
+          onClick={handleUpdateClick}
+        >
+          Save
+        </button>
       </div>
     </div>
   );
