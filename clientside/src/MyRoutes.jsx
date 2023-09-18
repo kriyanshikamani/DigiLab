@@ -5,11 +5,11 @@ import DownloadReport from "./components/Test_Packages/DownloadReport.jsx";
 import Aboutus from "./components/AboutUs/Aboutus.jsx";
 import Contectus from "./components/AboutUs/Contectus.jsx";
 import Reviews from "./components/AboutUs/Reviews.jsx";
-import Login from "./components/Login_Page/Login.jsx";
 import Test_Discription from "./components/Test_Packages/Test_Discription.jsx";
 import Mainbody from "./components/Mainbody/Mainbody.jsx";
 import PayOnline from './components/PayOnline/PayOnline.jsx';
 import Registration from './components/Registration/Registration.jsx';
+import Login from './components/Login/Login.jsx';
 
 const MyRoutes = () => {
   return (
@@ -21,7 +21,7 @@ const MyRoutes = () => {
           <Route path="/about-us" element={<Aboutus />} />
           <Route path="/download-report" element={<DownloadReport />} />
           <Route path='/login' element={<Login/>}/>
-        <Route path='/Registration' element={<Registration/>} />
+        <Route path='/register' element={<Registration/>} />
        
           <Route path="/pay-online" element={<PayOnline />} />
           <Route path="/reviews" element={<Reviews/>}/>

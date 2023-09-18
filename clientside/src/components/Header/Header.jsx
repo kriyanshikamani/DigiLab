@@ -1,7 +1,10 @@
-import React from "react";
+import React,{useEffect} from "react";
 //import { BsCart3 } from "react-icons/bs";
 import Logo from "../../assets/Logo.png";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
+import {useCookies} from 'react-cookie';
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const Header = () => {
   const navbar = [
@@ -12,6 +15,29 @@ const Header = () => {
     { name: "Pay Online", link: "/pay-online" },
     { name: "Reviews", link: "/reviews" },
   ];
+  const navigate = useNavigate();
+const [cookies,setCookie,removeCookie]=useCookies([]);
+
+useEffect(() => {
+  const verifyUser = async () => {
+    if (!cookies.jwt) {
+      navigate("/register");
+    } else {
+      const { data } = await axios.post("http://localhost:3000", {}, { withCredentials: true });
+      if (!data.status) {
+        removeCookie("jwt");
+        navigate("/register");
+      }
+    }
+  };
+
+  verifyUser();
+}, [cookies, navigate, removeCookie]);
+  const logOut = () => {
+    removeCookie("jwt");
+    window.history.replaceState(null, "", "/register");
+    navigate("/register");
+  }
 
   return (
     <div className="min-w-screen flex justify-between bg-gradient-to-l from-blue-900 to-blue-600 via-blue-700  py-4 items-center">
@@ -34,7 +60,15 @@ const Header = () => {
         <button className="rounded-sm px-4 text-white mx-3 border-blue-400 border-2 hover:bg-blue-700 font-bold text-md hover:font-extrabold cursor-pointer text-lg">
           <Link to="/login">Log in</Link>
         </button>
+                <button className="rounded-sm px-4 text-white mx-3 border-blue-400 border-2 hover:bg-blue-700 font-bold text-md hover:font-extrabold cursor-pointer text-lg"
+
+          onClick={logOut}
+        >
+          Log out
+        </button>
       </ul>
+     
+       
     </div>
   );
 };

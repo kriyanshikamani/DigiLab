@@ -1,53 +1,33 @@
 const dotenv = require('dotenv');
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
-const mongoose = require('mongoose');
-
-const Registration = require('./models/registration');
-
+const authRoutes=require("./routes/AuthRoutes");
 const app=express();
-app.use(express.json());
-app.use(cors());
+const cookieParser=require("cookie-parser");
+const cors = require('cors')
+ 
+app.use(cors(
+    {
+        origin:["http://localhost:5173"],
+        method:["GET","POST"],
+        credentials:true,
+    }
+));
 
+
+
+
+
+
+
+app.use(express.json());
 app.use(bodyParser.json());
 dotenv.config({path:'./config.env'});
 
 
 const router = express.Router();
 
-// Define a route for creating a new user with dynamic data
-router.post('/registration', async (req, res) => {
-  try {
-    // Fetch user data (e.g., from a request body)
-    const userData = req.body;
 
-    // Check if userData is valid and contains the required fields
-    if (!userData || !userData.firstName || !userData.lastName || !userData.email || !userData.password || !userData.confirmPassword) {
-      return res.status(400).json({ error: 'Invalid user data' });
-    }
-
-    // Create a new user based on the fetched data
-    const user = new Registration({
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-      email: userData.email,
-      password: userData.password,
-      confirmPassword: userData.confirmPassword,
-    });
-
-    // Save the user to the database
-    await user.save();
-
-    // Generate a JWT token for the user
-    const token = await user.generateAuthToken();
-
-    return res.status(201).json({ user, token });
-  } catch (error) {
-    console.error('Error creating user:', error);
-    return res.status(500).json({ error: 'Internal server error' });
-  }
-});
 
 module.exports = router;
   
@@ -60,7 +40,7 @@ const testpackageRoutes = require('./routes/testpackageRoutes');
 const testpanelRoutes = require('./routes/testpanelRoutes');
 
 
-const registrationRoutes = require('./routes/registrationRoutes');
+const { default: mongoose } = require('mongoose');
 
 require('./DB/conn');
 const PORT=process.env.PORT;
@@ -72,10 +52,10 @@ app.use('/patient', patientRoutes);
 app.use('/referral', referralRoutes);
 app.use('/testcategory', testcategoryRoutes);
 app.use('/testpackage', testpackageRoutes);
-app.use('/registration', registrationRoutes);
 app.use('/testpanel', testpanelRoutes);
 
-
+app.use(cookieParser());
+app.use("/",authRoutes);
 
 app.listen(PORT,()=>{
     console.log('Server is running on port ',PORT);

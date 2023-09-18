@@ -1,13 +1,12 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const PatientBill = () => {
-
-  const {patientId} = useParams();
+  const { patientId } = useParams();
   const [patientData, setpatientData] = useState(null);
 
   const getPatientData = async () => {
@@ -20,10 +19,9 @@ const PatientBill = () => {
     }
   };
 
-  useEffect(() =>{
+  useEffect(() => {
     getPatientData();
-    }
-  , [patientId]);
+  }, [patientId]);
 
   if (!patientData) {
     return <div>Loading...</div>;
@@ -55,11 +53,7 @@ const PatientBill = () => {
             <h2 className="text-2xl font-bold">DigiLab</h2>
             <p className="text-gray-500">Phone no.: 9876584231</p>
             {/* Add the barcode here */}
-            <img
-              src={`https://barcode.tec-it.com/barcode.ashx?data=${patientData.regNo}&code=Code128&dpi=96`}
-              alt="Barcode"
-              className="w-24 ml-auto p-2"
-            />
+            <img src={`https://barcode.tec-it.com/barcode.ashx?data=${patientData.regNo}&code=Code128&dpi=96`} alt="Barcode" className="w-24 ml-auto p-2" />
             {/* <p className="text-xl font-semibold">Bill no. {patientData.regNo}</p> */}
           </div>
           <p className="text-lg">Reg. no. {patientData.regNo}</p>
@@ -120,17 +114,13 @@ const PatientBill = () => {
         </div>
       </div>
 
-      <div >
-       
-      </div>
+      <div></div>
       <div className="justify-start py-3">
-        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold border-b-2 p mx-2 border-blue-700 hover:border-blue-500 rounded px-7 py-1">
-          Print
-        </button>
+        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold border-b-2 p mx-2 border-blue-700 hover:border-blue-500 rounded px-7 py-1">Print</button>
         {/* <Link to="/complete-blood-count" className="bg-white hover:bg-gray-200 border-blue-500  text-blue-900 font-bold border   rounded px-7 py-1">
           Enter Results
         </Link> */}
-         {/* <Link to="/cbc-with-abosulte-count" className="bg-white hover:bg-gray-200 border-blue-500  text-blue-900 font-bold border   rounded px-7 py-1">
+        {/* <Link to="/cbc-with-abosulte-count" className="bg-white hover:bg-gray-200 border-blue-500  text-blue-900 font-bold border   rounded px-7 py-1">
           Enter Results
         </Link> */}
         {/* <Link to="/cbc-with-esr" className="bg-white hover:bg-gray-200 border-blue-500  text-blue-900 font-bold border   rounded px-7 py-1">
@@ -140,10 +130,7 @@ const PatientBill = () => {
           Enter Results
         </Link>
 
-        
-        <button className="bg-white hover:bg-gray-200 text-Black mx-16 font-bold border-black border-2 rounded px-7 py-1">
-          Settings
-        </button>
+        <button className="bg-white hover:bg-gray-200 text-Black mx-16 font-bold border-black border-2 rounded px-7 py-1">Settings</button>
       </div>
     </div>
   );
