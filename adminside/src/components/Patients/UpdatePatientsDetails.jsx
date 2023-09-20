@@ -36,21 +36,15 @@ const UpdatePatientsDetails = () => {
   const handleUpdateClick = async () => {
     try {
       await axios.put(`http://localhost:3000/patient/${patientId}`, {
-        firstName: editedFirstName,
-        lastName: editedLastName,
-        mobileNumber: editedMobileNumber,
+        firstname: editedFirstName,
+        lastname: editedLastName,
+        phone: editedMobileNumber,
         email: editedEmail,
         address: editedAddress,
         gender: editedGender,
       });
       alert("Patient updated successfully.");
       navigate("/patients");
-      console.log(firstName);
-      console.log(lastName);
-      console.log(mobileNumber);
-      console.log(email);
-      console.log(address);
-      
     } catch (error) {
       console.error("Error updating patient:", error);
     }

@@ -83,12 +83,13 @@ const TestPanel = () => {
                 ))}
               </td>
               <td className="py-1 px-2">
-                <Link
-                  to={`/edit-test-panel/${panel._id}`} // You may want to pass the panel ID as a parameter to the edit page
-                  className="flex items-center px-2 py-1 rounded-md text-blue-500 hover:text-blue-900"
-                >
-                  <HiPencil className="mr-1" /> Edit
-                </Link>
+              <Link
+  to={`/edit-test-panel/${panel._id}`} // Pass the panel ID as a parameter to the edit page
+  className="flex items-center px-2 py-1 rounded-md text-blue-500 hover:text-blue-900"
+>
+  <HiPencil className="mr-1" /> Edit
+</Link>
+
               </td>
               <td>
                 <div className="flex items-center">

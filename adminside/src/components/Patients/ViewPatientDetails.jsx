@@ -20,6 +20,7 @@ const ViewPatientDetails = () => {
       } catch (error) {
         console.error("Error fetching patient data:", error);
       }
+      
     }
 
     fetchPatientData();
