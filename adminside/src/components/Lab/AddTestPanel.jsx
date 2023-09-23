@@ -57,12 +57,7 @@ const AddTestPanel = () => {
     updatedOptions.splice(index, 1);
     setSelectedOptions(updatedOptions);
 
-    const updatedTests = [...testpanel.tests];
-    updatedTests.splice(index, 1);
-    setTestPanel({
-      ...testpanel,
-      tests: updatedTests,
-    });
+    
   };
 
   const handleUpdatedClick = async () => {

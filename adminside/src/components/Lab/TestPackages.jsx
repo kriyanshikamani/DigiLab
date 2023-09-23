@@ -46,7 +46,7 @@ const TestPackages = () => {
 
       <div className="flex flex-row justify-between">
         <div className="flex flex-row">
-          <span className="text-sm text-gray-500 my-2">Please email to any feedbacks or suggestions regarding this feature to kriyanshikamani@gmail.com</span>
+          <span className="text-sm text-gray-500 my-2">Please email to any feedbacks or suggestions regarding this feature to digilab@gmail.com</span>
         </div>
       </div>
 

@@ -41,10 +41,10 @@ const MyRoutes = () => {
         <Route path="/add-patient" element={<Addpatient/>}/>
         <Route path="/add-referral" element={<AddReferral/>}/>
         <Route path="patient-bill/:patientId" element={<PatientBill/>}/>
-        {/* <Route path="/complete-blood-count" element={<Completebloodcount/>}/> */}
+        <Route path="/complete-blood-count" element={<Completebloodcount/>}/>
         {/* <Route path="/cbc-with-abosulte-count" element={<CbcWithAbCount/>}/> */}
         {/* <Route path="/cbc-with-esr" element={<CbcWithEsr/>}/> */}
-        <Route path="/liver-function-test" element={<LiverFunctionTest/>}/>
+        {/* <Route path="/liver-function-test" element={<LiverFunctionTest/>}/> */}
         <Route path="/user" element={<User/>}/>
         <Route path="/add-user" element={<AddUser/>}/>
         <Route path="/edit-user/:userId" element={<EditUser/>}/>

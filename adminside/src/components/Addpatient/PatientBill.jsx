@@ -117,18 +117,18 @@ const PatientBill = () => {
       <div></div>
       <div className="justify-start py-3">
         <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold border-b-2 p mx-2 border-blue-700 hover:border-blue-500 rounded px-7 py-1">Print</button>
-        {/* <Link to="/complete-blood-count" className="bg-white hover:bg-gray-200 border-blue-500  text-blue-900 font-bold border   rounded px-7 py-1">
+        <Link to="/complete-blood-count" className="bg-white hover:bg-gray-200 border-blue-500  text-blue-900 font-bold border   rounded px-7 py-1">
           Enter Results
-        </Link> */}
+        </Link>
         {/* <Link to="/cbc-with-abosulte-count" className="bg-white hover:bg-gray-200 border-blue-500  text-blue-900 font-bold border   rounded px-7 py-1">
           Enter Results
         </Link> */}
         {/* <Link to="/cbc-with-esr" className="bg-white hover:bg-gray-200 border-blue-500  text-blue-900 font-bold border   rounded px-7 py-1">
           Enter Results
         </Link> */}
-        <Link to="/liver-function-test" className="bg-white hover:bg-gray-200 border-blue-500  text-blue-900 font-bold border   rounded px-7 py-1">
+        {/* <Link to="/liver-function-test" className="bg-white hover:bg-gray-200 border-blue-500  text-blue-900 font-bold border   rounded px-7 py-1">
           Enter Results
-        </Link>
+        </Link> */}
 
         <button className="bg-white hover:bg-gray-200 text-Black mx-16 font-bold border-black border-2 rounded px-7 py-1">Settings</button>
       </div>
