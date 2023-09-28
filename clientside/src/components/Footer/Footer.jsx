@@ -87,7 +87,7 @@ const Footer = () => {
                   ))}
                 </ul>
               ) : (
-                <p className="text-white opacity-50 font-semibold">{section.content}</p>
+                <span className="text-white opacity-50 font-semibold">{section.content}</span>
               )}
             </div>
           ))}

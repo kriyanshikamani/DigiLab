@@ -1,10 +1,11 @@
 const dotenv = require('dotenv');
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const authRoutes=require("./routes/AuthRoutes");
+const adminRoutes=require("./routes/AdminRoutes");
 const app=express();
 const cookieParser=require("cookie-parser");
-const cors = require('cors')
  
 app.use(cors(
     {
@@ -13,13 +14,6 @@ app.use(cors(
         credentials:true,
     }
 ));
-
-
-
-
-
-
-
 app.use(express.json());
 app.use(bodyParser.json());
 dotenv.config({path:'./config.env'});
@@ -39,7 +33,6 @@ const testcategoryRoutes = require('./routes/testcategoryRoutes');
 const testpackageRoutes = require('./routes/testpackageRoutes');
 const testpanelRoutes = require('./routes/testpanelRoutes');
 
-
 const { default: mongoose } = require('mongoose');
 
 require('./DB/conn');
@@ -56,6 +49,7 @@ app.use('/testpanel', testpanelRoutes);
 
 app.use(cookieParser());
 app.use("/",authRoutes);
+app.use("/",adminRoutes);
 
 app.listen(PORT,()=>{
     console.log('Server is running on port ',PORT);

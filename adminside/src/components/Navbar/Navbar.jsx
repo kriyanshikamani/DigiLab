@@ -1,31 +1,57 @@
-import React, { useState } from "react";
-import Logo from "../../assets/logo.png";
-import User from "../../assets/user.jpg";
-const Navbar = () => {
-  const [showOptions, setShowOptions] = useState(false);
 
-  const toggleOptions = () => {
-    setShowOptions((prevState) => !prevState);
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Logo from "../../assets/logo.png";
+import {useCookies} from 'react-cookie';
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+
+const Navbar = () => {
+  const navigate = useNavigate();
+const [cookies,setCookie,removeCookie]=useCookies([]);
+
+useEffect(() => {
+  const verifyUser = async () => {
+    if (!cookies.jwt) {
+      navigate("/login");
+    } else {
+      const { data } = await axios.post("http://localhost:3000", {}, { withCredentials: true });
+      if (!data.status) {
+        removeCookie("jwt");
+        navigate("/login");
+      }
+    }
   };
 
+  verifyUser();
+}, [cookies, navigate, removeCookie]);
+  const logOut = () => {
+    removeCookie("jwt");
+    window.history.replaceState(null, "", "/login");
+    navigate("/login");
+  }
+
+ 
   return (
-    <nav className="flex items-center justify-between  bg-blue-900 text-white">
+    <>  
+    <nav className="flex items-center justify-between px-4 py-2 bg-blue-900 text-white h-[70px] ">
       <div className="flex items-center ml-0">
-        <img className="w-[140px]" src={Logo} alt="logo" />
+        <img className="w-[160px]" src={Logo} alt="logo" />
       </div>
       <div className="flex items-center">
-        <div className="flex items-center cursor-pointer" onClick={toggleOptions}>
-          <img className="w-10 h-10 rounded-full" src={User} alt="Profile" />
-          {showOptions && (
-            <ul className="absolute right-1 w-36 mt-36 bg-blue-950 shadow-lg rounded-md text-center">
-              <li className="px-4 py-2 border-b">My Account</li>
-              <li className="px-4 py-2 border-b">Log Out</li>
-            </ul>
-          )}
-        </div>
+        <button
+          onClick={logOut}
+          className="px-3 py-1 bg-blue-900 text-white rounded hover:bg-blue-800"
+        >
+          Log out
+        </button>
+       
       </div>
     </nav>
+     <ToastContainer/>
+    </>
   );
 };
 
 export default Navbar;
+

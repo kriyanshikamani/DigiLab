@@ -12,7 +12,7 @@ const EditTestPanel = () => {
   const navigate = useNavigate();
 
   const topicList = [
-    "Hemoglobin", "Total Leukocyte Count", "Differential Leucocyte Count", "Differential Leukocyte Count (Absolute count)", " Neutrophil Lymphocyte Ratio", " Platelet Count", "Total RBC Count", "Hematocrit Value", "Hct", "Mean Corpuscular Volume", "MCV", "Mean Cell Haemoglobin", "MCH", "Mean Cell Haemoglobin CON", "MCHC", "Mean Platelet Volume", "MPV", "R.D.W. - CV", "R.D.W.-SD","Hemoglobin", "Total Leukocyte Count", "Differential Leucocyte Count"," Platelet Count", "Total RBC Count", "Hematocrit Value", "Hct", "Mean Corpuscular Volume", "MCV", "Mean Cell Haemoglobin", "MCH", "Mean Cell Haemoglobin CON", "MCHC", "Mean Platelet Volume", "MPV", "R.D.W.-SD", "R.D.W.-CV", "P-LCR", "P.D.W."
+    "Bleeding Time", "Clotting Time", "Serum Bilirubin (Indirect)", "Serum Bilirubin (Direct)", "Serum Bilirubin (Total)", "Blood Sugar PP", "Fasting Blood Sugar", "Differential Leucocyte Count", "Total Leukocyte Count", "Hemoglobin", "Erythrocyte Sedimentation Rate (Wintrobe)", "Random Blood Sugar", "Blood Group & Rh.", "HBsAg", "Platelet Count", "Hepatitis C Virus", "HCV", "HIV (Card Test)", "Differential Leucocyte Count", "Serum Urea", "Serum Creatinine", "Total Leukocyte Count", "Hemoglobin", "Serum Potassium", "Serum Sodium"
   
   ];
 
@@ -20,23 +20,22 @@ const EditTestPanel = () => {
     name: "",
     price: "",
     category: "",
-    topics: [],
+    tests: [],
   });
 
   useEffect(() => {
     fetchData();
   }, [testpanelId]);
-  
+
   const fetchData = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/testpanel/${testpanelId}`);
-      const updatedTestPanel = response?.data;
-      setData(updatedTestPanel);
+      const updatedTestPackage = response?.data;
+      setData(updatedTestPackage);
     } catch (error) {
-      console.error("Error fetching tests data:", error);
+      console.error("Error fetching testcategory data:", error);
     }
   };
-  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -45,14 +44,14 @@ const EditTestPanel = () => {
 
   const handleSelectChange = (e) => {
     const selectedValue = e.target.value;
-    const updatedTopics = [...data.topics, selectedValue];
-    setData({ ...data, topics: updatedTopics });
+    const updatedTopics = [...data.tests, selectedValue];
+    setData({ ...data, tests: updatedTopics });
   };
 
   const removeFromList = (index) => {
-    const updatedTopics = [...data.topics];
+    const updatedTopics = [...data.tests];
     updatedTopics.splice(index, 1);
-    setData({ ...data, topics: updatedTopics });
+    setData({ ...data, tests: updatedTopics });
   };
 
   const handleUpdatedClick = async () => {
@@ -62,17 +61,17 @@ const EditTestPanel = () => {
         toast.success("Test panel Updated Successfully");
         navigate("/test-panels");
       } else {
-        toast.error("Tests Update Failed");
+        toast.error("Test panel Update Failed");
       }
     } catch (error) {
-      console.error("Error updating tests:", error);
+      console.error("Error updating test package:", error);
     }
   };
 
   return (
     <div className="container bg-white p-6">
       <div className="container mx-auto mt-4">
-        <h1 className="text-3xl font-bold mb-4 text-center">Edit Test Panel</h1>
+        <h1 className="text-3xl font-bold mb-4 text-center">Edit Test Package</h1>
         <div className="mb-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="col-span-1">
@@ -95,7 +94,7 @@ const EditTestPanel = () => {
 
       <div className="text-xl font-semibold py-2">Tests</div>
       <div className="col-span-5 py-2">
-        <select className="form-select" aria-label="Default select example" name="topics" onChange={handleSelectChange} value="">
+        <select className="form-select" aria-label="Default select example" name="tests" onChange={handleSelectChange} value="">
           <option value="" disabled>
             Select a topic
           </option>
@@ -109,14 +108,12 @@ const EditTestPanel = () => {
       <div className="border-gray-400 border-2 rounded-md ">
         <div className="grid grid-cols-1 gap-3 items-center my-1 ">
           <div className="flex border rounded-md p-3">
-          {data.topics && data.topics.map((option, index) => (
-  <div key={index} className="flex justify-between items-center me-3 rounded-md text-sm bg-gray-300 px-3 py-2">
-    <span className="me-2">{option}</span>
-    <AiOutlineClose className="w-4 h-4 cursor-pointer" onClick={() => removeFromList(index)} />
-  </div>
-))}
-
-
+            {data.tests.map((option, index) => (
+              <div key={index} className="flex justify-between items-center me-3 rounded-md text-sm bg-gray-300 px-3 py-2">
+                <span className="me-2">{option}</span>
+                <AiOutlineClose className="w-4 h-4 cursor-pointer" onClick={() => removeFromList(index)} />
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -132,4 +129,3 @@ const EditTestPanel = () => {
 };
 
 export default EditTestPanel;
-

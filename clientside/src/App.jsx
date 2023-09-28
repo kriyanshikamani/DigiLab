@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./main.css";
 import DigiLab from "./DigiLab";
 import { BrowserRouter } from "react-router-dom";
@@ -6,7 +6,6 @@ import { SharedContextProvider } from "./context/SharedContext.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { useCookies } from "react-cookie";
 import Login from "./components/Login/Login.jsx";
-import { Route, Routes } from "react-router-dom";
 import Registration from "./components/Registration/Registration";
 
 export default function App() {
@@ -18,7 +17,7 @@ export default function App() {
     useEffect(() => {
       if (cookies.jwt) {
         setIsLoggedIn(true);
-        setStep("stockinsights");
+        setStep("digilab");
       } else {
         setStep("registration");
       }
@@ -29,7 +28,7 @@ export default function App() {
   };
 
   const handleLoginSuccess = () => {
-    setStep("stockinsights");
+    setStep("digilab");
     setIsLoggedIn(true);
   };
   const handleLoginRedirect = () => {
@@ -40,30 +39,24 @@ export default function App() {
     setStep("registration");
   
   };
+ 
   return (
+    <>
     
-       <>
-    
-    <SharedContextProvider>
-    <BrowserRouter>
-      {step === "registration" && (
-       <Registration onRegisterSuccess={handleRegisterSuccess}  onLoginRedirect={handleLoginRedirect}/>
-     )}
-     {step === "login" && (
-       <Login onLoginSuccess={handleLoginSuccess} onRegisterRedirect={handleRegisterRedirect}/>
-     )}
-     {step === "stockinsights" && isLoggedIn && (
-       <DigiLab/>
-     )}
-    </BrowserRouter> 
-  </SharedContextProvider>
-  
- </>
-    
-    // <SharedContextProvider>
-    //   <BrowserRouter>
-    //     <DigiLab />
-    //   </BrowserRouter>
-    // </SharedContextProvider>
+       <SharedContextProvider>
+       <BrowserRouter>
+         {step === "registration" && (
+          <Registration onRegisterSuccess={handleRegisterSuccess}  onLoginRedirect={handleLoginRedirect}/>
+        )}
+        {step === "login" && (
+          <Login onLoginSuccess={handleLoginSuccess} onRegisterRedirect={handleRegisterRedirect}/>
+        )}
+        {step === "digilab" && isLoggedIn && (
+          <DigiLab/>
+        )}
+       </BrowserRouter> 
+     </SharedContextProvider>
+     
+    </>
   );
 }
