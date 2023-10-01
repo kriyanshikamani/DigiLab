@@ -30,7 +30,7 @@ useEffect(() => {
       subMenus: [
         { name: "All Cases", link: "/all-cases" },
         { name: "Patients", link: "/patients" },
-        { name: "Payments", link: "/payments" },
+       
         { name: "Referral Doctors", link: "/referral-doctors" },
       ],
     },

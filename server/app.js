@@ -54,3 +54,8 @@ app.use("/",adminRoutes);
 app.listen(PORT,()=>{
     console.log('Server is running on port ',PORT);
 });
+
+
+
+//npm cache clean --force
+//yarn cache clean

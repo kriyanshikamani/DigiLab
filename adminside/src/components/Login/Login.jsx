@@ -4,6 +4,8 @@ import { Link,useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
+import Logo_Balck from "../../assets/Logo_Black.jpeg"; 
+
 const Login = ({ onLoginSuccess}) => {
   const navigate=useNavigate();
   const [values, setValues] = useState({
@@ -37,6 +39,13 @@ const Login = ({ onLoginSuccess}) => {
         
           onLoginSuccess();
           navigate("/");
+          toast.success(`Hi, ${values.email}!`, {
+            position: "bottom-right",
+            style: {
+              backgroundColor: "black", // Background color
+              color: "white",          // Text color
+            },
+          });
         }
       }
     } catch (err) {
@@ -45,22 +54,22 @@ const Login = ({ onLoginSuccess}) => {
   };
 
   return (
-    <>
-      <div className="flex items-center justify-center min-h-screen rounded bg-gray-100">
-        <div className="w-full max-w-md p-4">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-400 via-blue-600 to-blue-800">
+    <div className="w-full max-w-md p-4">
           <form onSubmit={(e)=>handleSubmit(e)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div className="flex">
-              <div className="flex-col">
-                <div className="text-3xl font-semibold text-gray-600">
-                  StockInsights
-                </div>
-                <span className="text-sm">Take Charge of Your Stock</span>
-              </div>
+            <div className="flex flex-col items-center mb-6">
+          <img src={Logo_Balck} alt="/" className="mx-auto border-none h-32 " />
+            <span className="text-lg text-gray-600">
+             Lab Reports At Your FingerTips...
+            </span>
+          </div>
             </div>
-            <div className="border mt-6 p-6">
-              <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-              Login Account
-              </h2>
+            <div className="border p-6 rounded">
+            <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+              Login to Your Account
+            </h2>
+
          
               <div className="mb-4">
                 <label
@@ -103,9 +112,9 @@ const Login = ({ onLoginSuccess}) => {
               </div>
 
               <div className="flex items-center justify-center">
-                <button
-                  className=" text-center md:px-[118px] lg:px-[140px] py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded focus:outline-none focus:shadow-outline"
-                  type="submit"
+              <button
+  className="w-full md:w-auto py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-full focus:outline-none focus:ring focus:ring-blue-200 transition duration-300 ease-in-out"
+  type="submit"
                 >
                  Login
                 </button>
@@ -115,7 +124,7 @@ const Login = ({ onLoginSuccess}) => {
           <ToastContainer />
         </div>
       </div>
-    </>
+    
   );
 };
 

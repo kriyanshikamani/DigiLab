@@ -26,27 +26,7 @@ const All_cases = () => {
     setPatientData(patientData);
   },[patientData])
 
-  const search_regNo = () => {
-    const filteredData = getPatientData.filter((item) => {
-      return item.regNo.includes(searchRegNo);
-    });
-    setFilteredData(filteredData);
-  };
-  console.log(getPatientData)
-
-  const search_name = () => {
-    const filteredData = getPatientData.filter((item) => {
-      return item.firstName?.toLowerCase().includes(searchName.toLowerCase());
-    });
-    setFilteredData(filteredData);
-  };
-
-  const search_referral = () => {
-    const filteredData = getPatientData?.filter((item) => {
-      return item.referredBy?.toLowerCase().includes(searchReferredBy.toLowerCase());
-    });
-    setFilteredData(filteredData);
-  };
+ 
 
   // useEffect(() => search_referral(), [searchReferredBy]);
   // useEffect(() => search_regNo(), [searchRegNo]);
