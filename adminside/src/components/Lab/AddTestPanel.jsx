@@ -5,7 +5,7 @@ import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 
 const AddTestPanel = () => {
-  const tests = ["Hemoglobin", "Total Leukocyte Count", "Differential Leucocyte Count", "Differential Leukocyte Count (Absolute count)", " Neutrophil Lymphocyte Ratio", " Platelet Count", "Total RBC Count", "Hematocrit Value", "Hct", "Mean Corpuscular Volume", "MCV", "Mean Cell Haemoglobin", "MCH", "Mean Cell Haemoglobin CON", "MCHC", "Mean Platelet Volume", "MPV", "R.D.W. - CV", "R.D.W.-SD","Hemoglobin", "Total Leukocyte Count", "Differential Leucocyte Count"," Platelet Count", "Total RBC Count", "Hematocrit Value", "Hct", "Mean Corpuscular Volume", "MCV", "Mean Cell Haemoglobin", "MCH", "Mean Cell Haemoglobin CON", "MCHC", "Mean Platelet Volume", "MPV", "R.D.W.-SD", "R.D.W.-CV", "P-LCR", "P.D.W."];
+  const tests = ["Hemoglobin", "Total Leukocyte Count", "Differential Leucocyte Count", "Differential Leukocyte Count (Absolute count)", " Neutrophil Lymphocyte Ratio", " Platelet Count", "Total RBC Count", "Hematocrit Value", "Hct", "Mean Corpuscular Volume", "MCV", "Mean Cell Haemoglobin", "MCH", "Mean Cell Haemoglobin CON", "MCHC", "Mean Platelet Volume", "MPV", "R.D.W. - CV", "R.D.W.-SD", "P-LCR", "P.D.W.","Erythrocycle Sedimentation Rate(Wintrobe)","Serum Bilirubin (Total)"," Serum Bilirubin (Direct)", "Serum Bilirubin (Indirect)", "SGPT (ALT)", "SGOT (AST)", "Serum Alkaline Phosphatase", "Serum Protein", "Serum Albumin", "Globulin", "A/G Ratio"];
   
 
  
@@ -21,8 +21,11 @@ const AddTestPanel = () => {
   const categories = [
     { id: 1, name: "microbiology" },
     { id: 2, name: "biochemistry" },
-    {id: 3, name: "hematology"}
+    { id: 3, name: "hematology" },
+    
   ];
+
+  const [selectedCategory, setSelectedCategory] = useState("none");
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
@@ -30,8 +33,8 @@ const AddTestPanel = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setTestpackage({
-      ...testpackage,
+    setTestpanel({
+      ...testpanel,
       [name]: value,
     });
   };
@@ -44,7 +47,6 @@ const AddTestPanel = () => {
       tests: [...testpanel.tests, selectedOption],
     });
   };
-  
 
   const removeFromList = (index) => {
     const updatedOptions = [...selectedOptions];
@@ -69,10 +71,21 @@ const AddTestPanel = () => {
     console.log(testpanel);
   };
 
+  const handleClearClick = () => {
+    setTestpanel({
+      name: "",
+      price: "",
+      category: "",
+      tests: [],
+    });
+    setSelectedCategory("none");
+    setSelectedOptions([]);
+  };
+
   return (
     <div className="container bg-white p-6">
       <div className="container mx-auto mt-4">
-        <h1 className="text-3xl font-bold mb-4 text-center">Add Test Package</h1>
+        <h1 className="text-3xl font-bold mb-4 text-center">Add Test Panel</h1>
         <div className="mb-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="col-span-1">

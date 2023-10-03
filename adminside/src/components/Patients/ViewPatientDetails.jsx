@@ -54,7 +54,7 @@ const ViewPatientDetails = () => {
             </div>
             <div className="flex justify-center mt-4">
               <Link
-                to="/update-patient-details"
+                to={`/update-patient-details/${patientData._id}`}
                 className="flex items-center px-4 py-2 border-2 border-black rounded-md text-blue-500 hover:text-blue-900"
               >
                 <HiPencil className="mr-2 text-xl" /> Edit Profile

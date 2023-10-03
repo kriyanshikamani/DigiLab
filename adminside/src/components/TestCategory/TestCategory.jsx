@@ -37,18 +37,22 @@ const TestCategory = () => {
  
 
   return (
-    <div className="container bg-white p-6 mx-auto mt-4">
-      <h1 className="text-3xl font-bold mb-4 text-center">Test Categories</h1>
-
-      <div className="mb-4">
+    <div className="container mx-auto bg-white p-6">
+    <div className="flex flex-row justify-between">
+    <h1 className="text-2xl font-bold">Test Cetegory</h1>
+     
         <Link
           to="/add-category"
-          className="bg-blue-500 hover:bg-blue-800 text-white font-semibold py-1 px-2 rounded"
-        >
-          +Add Item
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">        
+         Add TestCategory
         </Link>
+    
+</div>
+<div className="flex flex-row justify-between">
+        <div className="flex flex-row">
+          <span className="text-sm text-gray-500 my-2">Please email to any feedbacks or suggestions regarding this feature to digilab@gmail.com</span>
+        </div>
       </div>
-
       <table className="my-2">
         <thead>
           <tr className="border bg-blue-800 text-white py-6 px-6">

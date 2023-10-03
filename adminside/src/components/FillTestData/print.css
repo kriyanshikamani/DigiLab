@@ -1,0 +1,33 @@
+/* print.css */
+@media print {
+    body * {
+      visibility: hidden;
+    }
+    .print-page,
+    .print-page * {
+      visibility: visible;
+    }
+    .print-page {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  
+    /* Set the page size to A4 or your preferred size */
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  
+    /* Remove any default margin or padding on the page */
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Hide elements with the noprint class when printing */
+    .noprint {
+      display: none;
+    }
+  }
+  

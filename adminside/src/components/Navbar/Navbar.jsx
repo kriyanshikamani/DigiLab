@@ -13,12 +13,12 @@ const [cookies,setCookie,removeCookie]=useCookies([]);
 useEffect(() => {
   const verifyUser = async () => {
     if (!cookies.jwt) {
-      navigate("/login");
+      navigate("/login1");
     } else {
       const { data } = await axios.post("http://localhost:3000", {}, { withCredentials: true });
       if (!data.status) {
         removeCookie("jwt");
-        navigate("/login");
+        navigate("/login1");
       }
     }
   };

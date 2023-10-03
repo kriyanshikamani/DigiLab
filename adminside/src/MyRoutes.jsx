@@ -32,6 +32,7 @@ import CbcWithEsr from './components/FillTestData/CbcWithEsr.jsx';
 import LiverFunctionTest from './components/FillTestData/LiverFunctionTest.jsx';
 import AddReferral from './components/Addpatient/AddReferral.jsx';
 import AddTestPackages from './components/Lab/AddTestPackages.jsx';
+import PrintPage from './components/FillTestData/PrintPage.jsx';
 
 const MyRoutes = () => {
   return (
@@ -45,6 +46,8 @@ const MyRoutes = () => {
         {/* <Route path="/cbc-with-abosulte-count" element={<CbcWithAbCount/>}/> */}
         {/* <Route path="/cbc-with-esr" element={<CbcWithEsr/>}/> */}
         {/* <Route path="/liver-function-test" element={<LiverFunctionTest/>}/> */}
+
+        <Route path="/printpage" element={<PrintPage/>}/>
         <Route path="/user" element={<User/>}/>
         <Route path="/add-user" element={<AddUser/>}/>
         <Route path="/edit-user/:userId" element={<EditUser/>}/>

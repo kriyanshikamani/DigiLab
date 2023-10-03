@@ -59,7 +59,7 @@ const PatientBill = () => {
           <p className="text-lg">Reg. no. {patientData.regNo}</p>
           <div className="grid grid-cols-2 gap-4 mt-4">
             <div className="justify-start">
-              <p className="text-lg font-semibold">Name : {patientData.firstname} </p>
+              <p className="text-lg font-semibold">Name : {patientData.firstname}  {patientData.lastname}</p>
               <p className="text-md">Age : {patientData.age}</p>
               <p className="text-md">Mobile: {patientData.phone}</p>
             </div>
@@ -67,7 +67,8 @@ const PatientBill = () => {
             <div>
               <div className="justify-end">
                 <p className="text-md font-semibold">Referred by: {patientData.referredBy}</p>
-                <p className="text-md">Date: {inData.date}</p>
+                <p className="text-md">Date: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+
                 <p className="text-md">Received by: {patientData.receivedBy}</p>
               </div>
             </div>

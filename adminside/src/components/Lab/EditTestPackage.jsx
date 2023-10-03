@@ -94,16 +94,17 @@ const EditTestPackage = () => {
 
       <div className="text-xl font-semibold py-2">Tests</div>
       <div className="col-span-5 py-2">
-        <select className="form-select" aria-label="Default select example" name="topics" onChange={handleSelectChange} value="">
-          <option value="" disabled>
-            Select a topic
-          </option>
-          {topicList.map((item, index) => (
-            <option value={item} key={index}>
-              {item}
-            </option>
-          ))}
-        </select>
+      <select className="form-select" aria-label="Default select example" name="topics" onChange={handleSelectChange} value={""}>
+  <option value="" disabled>
+    Select a topic
+  </option>
+  {topicList.map((item, index) => (
+    <option value={item} key={index}>
+      {item}
+    </option>
+  ))}
+</select>
+
       </div>
       <div className="border-gray-400 border-2 rounded-md ">
         <div className="grid grid-cols-1 gap-3 items-center my-1 ">

@@ -5,9 +5,10 @@ import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 
 const AddTestPackages = () => {
-  const topics = ["Bleeding Time", "Clotting Time", "Serum Bilirubin (Indirect)", "Serum Bilirubin (Direct)", "Serum Bilirubin (Total)", "Blood Sugar PP", "Fasting Blood Sugar", "Differential Leucocyte Count", "Total Leukocyte Count", "Hemoglobin", "Erythrocyte Sedimentation Rate (Wintrobe)", "Random Blood Sugar", "Blood Group & Rh.", "HBsAg", "Platelet Count", "Hepatitis C Virus", "HCV", "HIV (Card Test)", "Differential Leucocyte Count", "Serum Urea", "Serum Creatinine", "Total Leukocyte Count", "Hemoglobin", "Serum Potassium", "Serum Sodium"];
+  const topics = ["Clotting Time", "Bleeding Time","Blood Sugar PP", "Fasting Blood Sugar",
+"Serum Bilirubin (Indirect)", "Serum Bilirubin (Direct)", "Serum Bilirubin (Total)",
+"Erythrocyte Sedimentation Rate (Wintrobe)", "Differential Leucocyte Count"," Total Leukocyte Count", "Hemoglobin","	Serum Potassium", "Serum Sodium"];
 
-  // const [selectedCategory, setSelectedCategory] = useState("none");
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const [testpackage, setTestpackage] = useState({
@@ -20,12 +21,8 @@ const AddTestPackages = () => {
   const categories = [
     { id: 1, name: "microbiology" },
     { id: 2, name: "biochemistry" },
-    {id: 3, name: "hematology"}
+    { id: 3, name: "hematology" },
   ];
-
-  const handleCategoryChange = (event) => {
-    setSelectedCategory(event.target.value);
-  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -43,7 +40,6 @@ const AddTestPackages = () => {
       topics: [...testpackage.topics, selectedOption],
     });
   };
-  
 
   const removeFromList = (index) => {
     const updatedOptions = [...selectedOptions];
@@ -56,7 +52,7 @@ const AddTestPackages = () => {
       const response = await axios.post("http://localhost:3000/testpackage/store", testpackage);
       if (response.status === 201) {
         // Replace with the actual success status code
-        toast.success("test package Added Successfully");
+        toast.success("Test package Added Successfully");
       } else {
         toast.error("Error saving user data");
       }
@@ -82,19 +78,14 @@ const AddTestPackages = () => {
             </div>
             <div className="col-span-2">
               <label className="block font-bold mb-2">Select Laboratory Category:</label>
-              <select className="form-select w-full px-3 py-2 border rounded-md shadow-sm focus:ring focus:ring-opacity-50" name="category" id="category"  onChange={handleInputChange}>
+              <select className="form-select w-full px-3 py-2 border rounded-md shadow-sm focus:ring focus:ring-opacity-50" name="category" onChange={handleInputChange}>
                 <option value="none">None</option>
-                <option value="microbiology">Microbiology</option>
-                <option value="biochemistry">Biochemistry</option>
-                <option value="hematology">Hematology</option>
+                {categories.map((category) => (
+                  <option value={category.name} key={category.id}>
+                    {category.name}
+                  </option>
+                ))}
               </select>
-
-              {/* <input type="text" placeholder="Category" name="category" value={testpackage.category} onChange={handleInputChange} className="border rounded-lg px-3 py-2 w-full" /> */}
-              {/* {selectedCategory !== "none" && (
-                <div className="mt-4">
-                  <p className="font-semibold">You have selected: {selectedCategory}</p>
-                </div>
-              )} */}
             </div>
           </div>
         </div>
@@ -102,18 +93,16 @@ const AddTestPackages = () => {
 
       <div className="text-xl font-semibold py-2">Tests</div>
       <div className="col-span-5 py-2">
-      <select className="form-select" aria-label="Default select example" name="topics" onChange={(event) => { handleInputChange(event); addToList(event); }}>
-  <option value="none">None</option>
-  {topics.map((item, index) => (
-    <option value={item} key={index}>
-      {item}
-    </option>
-  ))}
-</select>
-
-        {/* <input type="text" placeholder="Topics" name="topics" value={testpackage.topics} onChange={handleInputChange} className="border rounded-lg px-3 py-2 w-full" /> */}
+        <select className="form-select" aria-label="Default select example" name="topics" onChange={(event) => { handleInputChange(event); addToList(event); }}>
+          <option value="none">None</option>
+          {topics.map((item, index) => (
+            <option value={item} key={index}>
+              {item}
+            </option>
+          ))}
+        </select>
       </div>
-      <div className="border-gray-400 border-2  rounded-md ">
+      <div className="border-gray-400 border-2 rounded-md ">
         <div className="grid grid-cols-1 gap-3 items-center my-1 ">
           <div className="flex border rounded-md p-3">
             {selectedOptions.map((option, index) => (

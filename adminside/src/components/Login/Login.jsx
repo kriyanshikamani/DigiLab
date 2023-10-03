@@ -4,7 +4,7 @@ import { Link,useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
-import Logo_Balck from "../../assets/Logo_Black.jpeg"; 
+import Logo_Balck from "../../assets/Logo_Black.png"; 
 
 const Login = ({ onLoginSuccess}) => {
   const navigate=useNavigate();
@@ -23,7 +23,7 @@ const Login = ({ onLoginSuccess}) => {
   
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/login",
+        "http://localhost:3000/login1",
         {
           ...values,
         },

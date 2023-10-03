@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import PrintPage from "./PrintPage.jsx";
+
 
 const Completebloodcount = () => {
   const patientData = {
@@ -133,15 +135,19 @@ const Completebloodcount = () => {
       ],
     },
   ];
-  const initialInputValues = testResults.map((result) => result.Rows.map(() => ""));
+  const initialInputValues = testResults.map((result) =>
+    result.Rows.map(() => "")
+  );
 
   const [inputValues, setInputValues] = useState(initialInputValues);
+  const [reportGenerated, setReportGenerated] = useState(false);
 
   const handleInputChange = (event, mainIndex, subIndex) => {
     const newInputValues = [...inputValues];
     newInputValues[mainIndex][subIndex] = event.target.value;
     setInputValues(newInputValues);
   };
+
   const labInfo = {
     name: "DigiLab LAB",
     contact: "Contact: 123-456-7890",
@@ -152,91 +158,124 @@ const Completebloodcount = () => {
       { name: "Dr. Payal Shah", title: "(MD, Pathologist)" },
     ],
   };
+
+  const generateReport = () => {
+    setReportGenerated(true);
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen">
-      <header className="bg-blue-500 text-white p-4 flex justify-between items-center">
+      {reportGenerated ? (
+        <PrintPage
+          labInfo={labInfo}
+          patientData={patientData}
+          TestName={TestName}
+          testResults={testResults}
+          inputValues={inputValues}
+        />
+      ) : (
         <div>
-          <h1 className="text-2xl font-bold">{labInfo.name}</h1>
-        </div>
-        <div className="text-right">
-          <p>{labInfo.contact}</p>
-          <p>{labInfo.email}</p>
-        </div>
-      </header>
+          <header className="bg-blue-500 text-white p-4 flex justify-between items-center">
+            <div>
+              <h1 className="text-2xl font-bold">{labInfo.name}</h1>
+            </div>
+            <div className="text-right">
+              <p>{labInfo.contact}</p>
+              <p>{labInfo.email}</p>
+            </div>
+          </header>
 
-      <div className="bg-white p-4 shadow-md rounded-lg">
-        <div className="mb-4 flex">
-          <div className="flex-1 text-left">
-            <h2 className="text-lg font-bold">Patient Information</h2>
-            <p>Name: {patientData.name}</p>
-            <p>Age: {patientData.age}</p>
-            <p>Sex: {patientData.sex}</p>
-            <p>PID: {patientData.pid}</p>
-          </div>
-          <div className="flex-1 text-right">
-            <p>Ref. By: {patientData.referredBy}</p>
-            <p>Date: {patientData.date}</p>
-            <p>Receive By: {patientData.receivedBy}</p>
-          </div>
-        </div>
-
-        <div>
-          <h2 className="text-lg font-bold">Test Results</h2>
-          <h2 className="text-lg font-bold text-center py-3">{TestName.name}</h2>
-          <table className="w-full">
-            <thead>
-              <tr className="border-b-2 border-black text-[17px]">
-                <td className="px-4 font-bold ">Investigation</td>
-                <td className="px-4 font-bold  text-right">Result</td>
-                <td className="px-4 font-bold  text-right">Unit</td>
-                <td className="px-4 font-bold ">Reference Value</td>
-              </tr>
-            </thead>
-
-            <tbody>
-              {testResults.map((result, mainIndex) => (
-                <React.Fragment key={mainIndex}>
-                  <tr className="text-sm">
-                    <td className="px-8 py-2 font-semibold" colSpan="4">
-                      {result.Investigationtype}
-                    </td>
-                  </tr>
-                  {result.Rows.map((row, subIndex) => (
-                    <tr key={subIndex} className="text-sm">
-                      <td className="px-8 py-2">{row.Investigation}</td>
-                      <td className="px-8 py-2 text-right">
-                        <input className="w-full px-2 py-2 border rounded-md focus:outline-none focus:border-blue-500" type="text" id={`inputField_${mainIndex}_${subIndex}`} value={inputValues[mainIndex][subIndex] || ""} onChange={(event) => handleInputChange(event, mainIndex, subIndex)} />
-                      </td>
-                      <td className="px-8 py-2 text-left">{row.Unit}</td>
-                      <td className="px-8 py-2">
-                        {row.MinValue} - {row.MaxValue}
-                      </td>
-                    </tr>
-                  ))}
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <hr />
-        <footer className="bg-white-500 text-black p-4 text-center my-10">
-          <div className="flex flex-col items-center">
-            <div className="text-base ">
-              {labInfo.name}
-              <div className="flex space-x-40 mt-16 ">
-                {labInfo.personnel.map((person, index) => (
-                  <div key={index}>
-                    <div className="font-bold">{person.name}</div> {person.title}
-                  </div>
-                ))}
+          <div className="bg-white p-4 shadow-md rounded-lg">
+            <div className="mb-4 flex">
+              <div className="flex-1 text-left">
+                <h2 className="text-lg font-bold">Patient Information</h2>
+                <p>Name: {patientData.name}</p>
+                <p>Age: {patientData.age}</p>
+                <p>Sex: {patientData.sex}</p>
+                <p>PID: {patientData.pid}</p>
+              </div>
+              <div className="flex-1 text-right">
+                <p>Ref. By: {patientData.referredBy}</p>
+                <p>Date: {patientData.date}</p>
+                <p>Receive By: {patientData.receivedBy}</p>
               </div>
             </div>
+
+            <div>
+              <h2 className="text-lg font-bold">Test Results</h2>
+              <h2 className="text-lg font-bold text-center py-3">{TestName.name}</h2>
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b-2 border-black text-[17px]">
+                    <td className="px-4 font-bold ">Investigation</td>
+                    <td className="px-4 font-bold  text-right">Result</td>
+                    <td className="px-4 font-bold  text-right">Unit</td>
+                    <td className="px-4 font-bold ">Reference Value</td>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {testResults.map((result, mainIndex) => (
+                    <React.Fragment key={mainIndex}>
+                      <tr className="text-sm">
+                        <td className="px-8 py-2 font-semibold" colSpan="4">
+                          {result.Investigationtype}
+                        </td>
+                      </tr>
+                      {result.Rows.map((row, subIndex) => (
+                        <tr key={subIndex} className="text-sm">
+                          <td className="px-8 py-2">{row.Investigation}</td>
+                          <td className="px-8 py-2 text-right">
+                            <input
+                              className="w-full px-2 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                              type="text"
+                              id={`inputField_${mainIndex}_${subIndex}`}
+                              value={inputValues[mainIndex][subIndex] || ""}
+                              onChange={(event) => handleInputChange(event, mainIndex, subIndex)}
+                            />
+                          </td>
+                          <td className="px-8 py-2 text-left">{row.Unit}</td>
+                          <td className="px-8 py-2">
+                            {row.MinValue} - {row.MaxValue}
+                          </td>
+                        </tr>
+                      ))}
+                    </React.Fragment>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <hr />
+            <footer className="bg-white-500 text-black p-4 text-center my-10">
+              <div className="flex flex-col items-center">
+                <div className="text-base ">
+                  {labInfo.name}
+                  <div className="flex space-x-40 mt-16 ">
+                    {labInfo.personnel.map((person, index) => (
+                      <div key={index}>
+                        <div className="font-bold">{person.name}</div> {person.title}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <p className="mt-4">****End of Report****</p>
+            </footer>
           </div>
-          <hr />
-          <p className="mt-4">****End of Report****</p>
-        </footer>
-      </div>
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded-md mt-8 mb-6"
+            onClick={generateReport}
+          >
+            Generate Report
+          </button>
+
+          {reportGenerated ? (
+            <div className="text-green-600 mt-8">Report has been generated!</div>
+          ) : null}
+        </div>
+      )}
     </div>
   );
 };

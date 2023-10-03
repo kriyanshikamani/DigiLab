@@ -78,15 +78,11 @@ const Addpatient = () => {
   };
 
   const topics = [
-    { name: "CK-MB", price: 100 },
-    { name: "Clotting Time", price: 150 },
-    { name: "Bilirubin Total, Direct and Indirect", price: 250 },
-    { name: "Blood Group", price: 500 },
-    { name: "Blood Sugar Fasting", price: 120 },
-    { name: "Blood Sugar PP", price: 140 },
-    { name: "Blood Urea", price: 800 },
-    { name: "Blood Urea Nitrogen", price: 180 },
-    { name: "Blood", price: 700 },
+   {name:"BT & CT",price:100},
+   {name:"Blood Sugar Fasting & PP",price:100},
+    {name:"Bilirubin Total & Direct",price:100},
+    {name:"HB,TLC,DLC,ESR",price:100},
+    {name:"Serum Electrolytes",price:100},
     { name: "CBC (Complete Blood Count)", price: 1000 },
     { name: "CBC with Absolute Count", price: 1000 },
     { name: "CBC with ESR", price: 1200 },

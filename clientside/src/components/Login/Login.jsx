@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 
-import Logo_Balck from "../../assets/Logo_Black.jpeg"; 
+import Logo_Balck from "../../assets/Logo_Black.png"; 
 
 const Login = ({ onLoginSuccess, onRegisterRedirect }) => {
   const navigate = useNavigate();
